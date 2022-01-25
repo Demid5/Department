@@ -21,57 +21,35 @@
         </header>
 
         <div class="row align-items-md-stretch">
-            <div class="col-md-3">
-                <div>
-                    <form action="#" th:action="@{/}" method="get">
-                    <ul class="list-group">
-                            <li class="list-group-item" th:each="dep : ${departments}">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." name="deps" th:value="${dep.id}">
-                                <span th:text="${dep.name}"></span>
-                            </li>
-                     </ul>
-                    <br>
-                    <button type="button" class="btn btn-dark">Add</button>
-                    <button type="submit" class="btn btn-primary">Show employees</button>
-                    </form>
+            <form th:action="@{addEmployee}" method="post">
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="last-name" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last name">
+                </div>
+                <div class="mb-3">
+                    <label for="first-name" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="first-name" name="first-name" placeholder="First name">
+                </div>
+                <div class="mb-3">
+                    <label for="middle-name" class="form-label">Middle name</label>
+                    <input type="text" class="form-control" id="middle-name" name="middle-name" placeholder="Middle name">
                 </div>
             </div>
 
-            <div class="col-md-9">
-                <div class="h-100 p-5 bg-light border rounded-3">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Last name</th>
-                            <th scope="col">First name</th>
-                            <th scope="col">Middle name</th>
-                            <th scope="col">Department</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="employee : ${employees}">
-                            <td th:text="*{employee.last_name}"></td>
-                            <td th:text="*{employee.first_name}"></td>
-                            <td th:text="*{employee.middle_name}"></td>
-                            <td th:text="*{employee.department.name}"></td>
-                            <td>
-                                <form th:action="@{/updateEmployee}">
-                                    <input hidden name="empId" th:value="${employee.id}">
-                                    <button type="submit" class="btn btn-info">Edit</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form th:action="@{/deleteEmployee}" method="post">
-                                    <input hidden name="empId" th:value="${employee.id}">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <a role="button" class="btn btn-dark" href="/addEmployee">Add</a>
-                </div>
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="dep : ${departments}">
+                        <input class="form-check-input me-1" type="radio" value="" aria-label="..." name="depId"  th:value="${dep.id}">
+                        <span th:text="${dep.name}"></span>
+                    </li>
+                </ul>
             </div>
+
+                <button type="submit" class="btn btn-info">Add</button>
+
+            </form>
         </div>
 
         <footer class="pt-3 mt-4 text-muted border-top">

@@ -7,7 +7,12 @@ import departament.task.web.test.repo.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CrudServiceImpl implements CrudService {
@@ -20,17 +25,47 @@ public class CrudServiceImpl implements CrudService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public List<Employee> readEmployeesByListOfDepartment(List<Long> deps) {
-        return null;
+    public List<Employee> findEmployeesByListOfDepartmentId(int[] deps) {
+        if (deps == null) {
+            return Collections.emptyList();
+        }
+        return employeeRepository.findAll().stream()
+                .filter(x -> Arrays.stream(deps).anyMatch(depId -> depId == x.getDepartment().getId()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Employee> readEmployees() {
+    public List<Employee> findEmployees() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public List<Department> readDepartments() {
+    public void addEmployee(String lastName, String firstName, String middleName, Long depId) {
+        employeeRepository.save(new Employee(firstName, lastName, middleName,
+                departmentRepository.getById(depId)));
+    }
+
+    @Transactional
+    @Override
+    public void updateEmployee(Long empId, String lastName, String firstName,
+                               String middleName, Long depId) {
+        employeeRepository.deleteById(empId);
+        addEmployee(lastName, firstName, middleName, depId);
+    }
+
+    @Override
+    public Employee findEmployeeById(long id) {
+        Optional<Employee> emp;
+        return (emp = employeeRepository.findById(id)).isEmpty() ? null : emp.get();
+    }
+
+    @Override
+    public List<Department> findDepartments() {
         return departmentRepository.findAll();
+    }
+
+    @Override
+    public void deleteEmployee(Long empId) {
+        employeeRepository.deleteById(empId);
     }
 }

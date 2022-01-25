@@ -1,8 +1,8 @@
 package departament.task.web.test.entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 @Table(name = "department")
@@ -15,7 +15,7 @@ public class Department {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-    Set<Employee> employees = new HashSet<>();
+    List<Employee> employees;
 
     public void setId(Long id) {
         this.id = id;
@@ -33,11 +33,11 @@ public class Department {
         this.name = name;
     }
 
-    public Set<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 }
