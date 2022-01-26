@@ -14,4 +14,4 @@
 ### 2. Run application.
 
 1) `mvn package` - для формирования jar файла
-2) `java -jar target/Department-0.0.1-SNAPSHOT.jar` - запуск приложения
+2) `java -jar target/Department-0.0.1-SNAPSHOT.jar` - запуск приложения, после можно переходить по ссылке [http://localhost:[номер порта]/](http://localhost:8080/)
