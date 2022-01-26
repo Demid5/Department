@@ -3,14 +3,13 @@ package departament.task.web.test.entities;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name = "department")
 public class Department {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false, unique = true)

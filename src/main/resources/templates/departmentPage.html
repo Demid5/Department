@@ -26,7 +26,7 @@
                     <form action="#" th:action="@{/}" method="get">
                     <ul class="list-group">
                             <li class="list-group-item" th:each="dep : ${departments}">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." name="deps" th:value="${dep.id}">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." name="depIds" th:value="${dep.id}">
                                 <span th:text="${dep.name}"></span>
                             </li>
                      </ul>

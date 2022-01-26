@@ -24,15 +24,6 @@ public class Employee {
     @JoinColumn(name = "id_depatrment")
     private Department department;
 
-    public Employee() {}
-
-    public Employee(String firstName, String lastName, String middleName, Department department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.department = department;
-    }
-
     public Long getId() {
         return id;
     }

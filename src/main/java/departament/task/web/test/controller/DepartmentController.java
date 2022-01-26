@@ -7,21 +7,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class DepartmentController {
     @Autowired
     private CrudService crudService;
 
     @GetMapping(value = "/")
-    public String showEmployeeDepartment(@RequestParam(value = "deps", required = false) long[] deps,
+    public String showEmployeeDepartment(@RequestParam(value = "depIds", required = false) List<Long> depIds,
                                         Model model) {
-        model.addAttribute("employees", crudService.findEmployeesByListOfDepartmentId(deps));
+        model.addAttribute("employees", crudService.findEmployeesByListOfDepartmentId(depIds));
         model.addAttribute("departments", crudService.findDepartments());
         return "departmentPage";
     }
 
     @GetMapping(value = "/editEmployee/{id}")
-    public String editEmployee(@PathVariable long id,
+    public String editEmployee(@PathVariable Long id,
                                Model model) {
         model.addAttribute("departments", crudService.findDepartments());
         model.addAttribute("employee", crudService.findEmployeeById(id));
@@ -29,7 +31,7 @@ public class DepartmentController {
     }
 
     @GetMapping(value = "/deleteEmployee/{id}")
-    public String deleteEmployee(@PathVariable long id,
+    public String deleteEmployee(@PathVariable Long id,
                                  Model model) {
         crudService.deleteEmployee(id);
         return "redirect:/";

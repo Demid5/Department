@@ -9,16 +9,33 @@ import java.util.List;
 public interface CrudService {
     /**
      * Вернуть список сотрудников из заданных отделов
-     * @param deps
-     * @return
+     * @param depIds - список id отделов
+     * @return список сотрудников из заданных отделов
      */
-    List<Employee> findEmployeesByListOfDepartmentId(long[] deps);
+    List<Employee> findEmployeesByListOfDepartmentId(@Nullable List<Long> depIds);
 
+    /**
+     * Сохранить сотрудника(нового/текущего) в бд
+     * @param employee - сотрудник
+     */
     void saveEmployee(Employee employee);
 
-    Employee findEmployeeById(long id);
+    /**
+     * Найти сотрудника по первичному ключу
+     * @param id - первичный ключ сотрудника
+     * @return - найденный сотрудник
+     */
+    Employee findEmployeeById(Long id);
 
+    /**
+     * Вернуть все отделы
+     * @return все отделы
+     */
     List<Department> findDepartments();
 
-    void deleteEmployee(Long empId);
+    /**
+     * Удалить сотрудника по первичному ключу
+     * @param id - первичный ключ сотрудника
+     */
+    void deleteEmployee(Long id);
 }

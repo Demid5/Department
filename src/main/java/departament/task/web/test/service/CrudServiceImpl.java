@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,17 +29,17 @@ public class CrudServiceImpl implements CrudService {
     }
 
     @Override
-    public Employee findEmployeeById(long id) {
+    public Employee findEmployeeById(Long id) {
         return employeeRepository.findById(id).get();
     }
 
     @Override
-    public List<Employee> findEmployeesByListOfDepartmentId(long[] deps) {
-        if (deps == null) {
+    public List<Employee> findEmployeesByListOfDepartmentId(List<Long> depIds) {
+        if (depIds == null) {
             return Collections.emptyList();
         }
         return employeeRepository.findAll().stream()
-                .filter(x -> Arrays.stream(deps).anyMatch(depId -> depId == x.getDepartment().getId()))
+                .filter(x -> depIds.stream().anyMatch(depId -> depId.equals(x.getDepartment().getId())))
                 .collect(Collectors.toList());
     }
 
@@ -50,7 +49,7 @@ public class CrudServiceImpl implements CrudService {
     }
 
     @Override
-    public void deleteEmployee(Long empId) {
-        employeeRepository.deleteById(empId);
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
     }
 }
