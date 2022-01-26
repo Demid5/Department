@@ -26,3 +26,5 @@ create table employee
 alter table employee
     add primary key (id);
 
+insert into department (name)
+values ('Law'), ('Financial'), ('Economic');
