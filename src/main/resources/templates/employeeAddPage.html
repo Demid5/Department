@@ -20,7 +20,7 @@
             </a>
         </header>
 
-        <form th:action="@{addEmployee}" th:object="${employee}" method="post">
+        <form th:action="@{/saveEmployee}" th:object="${employee}" method="post">
             <div class="row align-items-md-stretch">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -46,7 +46,7 @@
                         </ul>
                     </div>
 
-                    <button type="submit" class="btn btn-info">Add</button>
+                    <button type="submit" class="btn btn-info">Save</button>
             </div>
         </form>
 

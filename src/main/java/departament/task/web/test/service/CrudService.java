@@ -12,30 +12,9 @@ public interface CrudService {
      * @param deps
      * @return
      */
-    List<Employee> findEmployeesByListOfDepartmentId(int[] deps);
+    List<Employee> findEmployeesByListOfDepartmentId(long[] deps);
 
-    List<Employee> findEmployees();
-
-    /**
-     * Добавить нового сотрудника в бд по заданным параметрам
-     * @param lastName - фамилия
-     * @param firstName - имя
-     * @param middleName - отчество(необязательно)
-     * @param depId - id отдела
-     */
-    void addEmployee(String lastName, String firstName, @Nullable String middleName, Long depId);
-
-    void addEmployee(Employee employee);
-
-    /**
-     * Редактировать текущего сотрудника в бд по заданным параметрам
-     * @param empId - id сотрудника
-     * @param lastName - фамилия
-     * @param firstName - имя
-     * @param middleName - отчество(необязательно)
-     * @param depId - id отдела
-     */
-    void updateEmployee(Long empId, String lastName, String firstName, @Nullable String middleName, Long depId);
+    void saveEmployee(Employee employee);
 
     Employee findEmployeeById(long id);
 

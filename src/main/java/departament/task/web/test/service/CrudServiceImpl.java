@@ -25,7 +25,17 @@ public class CrudServiceImpl implements CrudService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public List<Employee> findEmployeesByListOfDepartmentId(int[] deps) {
+    public List<Department> findDepartments() {
+        return departmentRepository.findAll();
+    }
+
+    @Override
+    public Employee findEmployeeById(long id) {
+        return employeeRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Employee> findEmployeesByListOfDepartmentId(long[] deps) {
         if (deps == null) {
             return Collections.emptyList();
         }
@@ -35,36 +45,8 @@ public class CrudServiceImpl implements CrudService {
     }
 
     @Override
-    public List<Employee> findEmployees() {
-        return employeeRepository.findAll();
-    }
-
-    @Override
-    public void addEmployee(String lastName, String firstName, String middleName, Long depId) {
-        employeeRepository.saveAndFlush(new Employee(firstName, lastName, middleName,
-                departmentRepository.getById(depId)));
-    }
-
-    @Override
-    public void addEmployee(Employee employee) {
+    public void saveEmployee(Employee employee) {
         employeeRepository.saveAndFlush(employee);
-    }
-
-    @Override
-    public void updateEmployee(Long empId, String lastName, String firstName,
-                               String middleName, Long depId) {
-        employeeRepository.deleteById(empId);
-        addEmployee(lastName, firstName, middleName, depId);
-    }
-
-    @Override
-    public Employee findEmployeeById(long id) {
-        return employeeRepository.findById(id).get();
-    }
-
-    @Override
-    public List<Department> findDepartments() {
-        return departmentRepository.findAll();
     }
 
     @Override

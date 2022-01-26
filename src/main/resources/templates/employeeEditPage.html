@@ -20,34 +20,33 @@
             </a>
         </header>
 
-        <form th:action="@{/updateEmployee}" method="post">
+        <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="post">
         <div class="row align-items-md-stretch">
-
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="last-name" class="form-label">Last name</label>
-                    <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last name" th:value="${employee.lastName}">
+                    <input type="text" class="form-control" id="last-name" th:field="*{lastName}" placeholder="Last name" th:value="${employee.lastName}">
                 </div>
                 <div class="mb-3">
                     <label for="first-name" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="first-name" name="first-name" placeholder="First name" th:value="${employee.firstName}">
+                    <input type="text" class="form-control" id="first-name" th:field="*{firstName}" placeholder="First name" th:value="${employee.firstName}">
                 </div>
                 <div class="mb-3">
                     <label for="middle-name" class="form-label">Middle name</label>
-                    <input type="text" class="form-control" id="middle-name" name="middle-name" placeholder="Middle name" th:value="${employee.middleName}">
+                    <input type="text" class="form-control" id="middle-name" th:field="*{middleName}" placeholder="Middle name" th:value="${employee.middleName}">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <ul class="list-group">
                     <li class="list-group-item" th:each="dep : ${departments}">
-                        <input class="form-check-input me-1" type="radio" th:value="${dep.id}" aria-label="..." name="depId" th:checked="${dep.id} == ${employee.department.id}">
+                        <input class="form-check-input me-1" type="radio" th:field="*{department}" th:value="${dep.id}" aria-label="..." name="depId" th:checked="${dep.id} == ${employee.department.id}">
                         <span th:text="${dep.name}"></span>
                     </li>
                 </ul>
             </div>
 
-                <input type="hidden" name="empId" th:value="${employee.id}">
+                <input type="hidden" th:field="*{id}" th:value="${employee.id}">
                 <button type="submit" class="btn btn-info">Save</button>
         </div>
         </form>

@@ -12,8 +12,8 @@ public class DepartmentController {
     @Autowired
     private CrudService crudService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String processDepartmentForm(@RequestParam(value = "deps", required = false) int[] deps,
+    @GetMapping(value = "/")
+    public String showEmployeeDepartment(@RequestParam(value = "deps", required = false) long[] deps,
                                         Model model) {
         model.addAttribute("employees", crudService.findEmployeesByListOfDepartmentId(deps));
         model.addAttribute("departments", crudService.findDepartments());
@@ -35,27 +35,16 @@ public class DepartmentController {
         return "redirect:/";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/updateEmployee")
-    public String editEmployee(@RequestParam(value = "empId") long empId,
-                                 @RequestParam(value = "last-name") String lastName,
-                                 @RequestParam(value = "first-name") String firstName,
-                                 @RequestParam(value = "middle-name") String middleName,
-                                 @RequestParam(value = "depId") long depId) {
-        crudService.updateEmployee(empId, lastName, firstName, middleName, depId);
-        return "redirect:/";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/addEmployee")
+    @GetMapping(value = "/addEmployee")
     public String addEmployee(Model model) {
-        Employee employee = new Employee();
+        model.addAttribute("employee", new Employee());
         model.addAttribute("departments", crudService.findDepartments());
-        model.addAttribute("employee", employee);
         return "employeeAddPage";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/addEmployee")
-    public String addEmployee(@ModelAttribute("employee") Employee employee) {
-        crudService.addEmployee(employee);
+    @PostMapping(value = "/saveEmployee")
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+        crudService.saveEmployee(employee);
         return "redirect:/";
     }
 
