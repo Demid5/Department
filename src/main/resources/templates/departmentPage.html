@@ -43,7 +43,7 @@
                         <tr>
                             <th scope="col">Last name</th>
                             <th scope="col">First name</th>
-                            <th scope="col">Middle name</th>
+                            <th scope="col">Phone</th>
                             <th scope="col">Department</th>
                         </tr>
                         </thead>
@@ -51,7 +51,7 @@
                         <tr th:each="employee : ${employees}">
                             <td th:text="*{employee.lastName}"></td>
                             <td th:text="*{employee.firstName}"></td>
-                            <td th:text="*{employee.middleName}"></td>
+                            <td th:text="*{employee.phone}"></td>
                             <td th:text="*{employee.department.name}"></td>
                             <td>
                                 <a role="button" class="btn btn-info" th:href="@{'/editEmployee/' + ${employee.id}}">Edit</a>

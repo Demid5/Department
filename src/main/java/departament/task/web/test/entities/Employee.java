@@ -17,8 +17,8 @@ public class Employee {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "middle_name")
-    private String middleName;
+    @Column(name = "phone", nullable = false)
+    private String phone;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_depatrment")
@@ -48,12 +48,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Department getDepartment() {

@@ -14,7 +14,7 @@ create table employee
     id            int auto_increment,
     last_name   varchar(50) not null,
     first_name  varchar(50) not null,
-    middle_name varchar(50) null,
+    phone varchar(50) not null,
     id_depatrment int         not null,
     constraint employee_id_uindex
         unique (id),
