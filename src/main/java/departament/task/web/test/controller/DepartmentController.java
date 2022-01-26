@@ -11,8 +11,12 @@ import java.util.List;
 
 @Controller
 public class DepartmentController {
+    private final CrudService crudService;
+
     @Autowired
-    private CrudService crudService;
+    public DepartmentController(CrudService crudService) {
+        this.crudService = crudService;
+    }
 
     @GetMapping(value = "/")
     public String showEmployeeDepartment(@RequestParam(value = "depIds", required = false) List<Long> depIds,

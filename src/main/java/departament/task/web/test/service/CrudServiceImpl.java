@@ -15,13 +15,15 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class CrudServiceImpl implements CrudService {
-    /**
-     * Инъекции зависимости от репозиториев таблиц
-     */
+
+    private final DepartmentRepository departmentRepository;
+    private final EmployeeRepository employeeRepository;
+
     @Autowired
-    private DepartmentRepository departmentRepository;
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    public CrudServiceImpl(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
+        this.departmentRepository = departmentRepository;
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public List<Department> findDepartments() {
