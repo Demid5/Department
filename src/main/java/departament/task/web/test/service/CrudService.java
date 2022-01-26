@@ -25,6 +25,8 @@ public interface CrudService {
      */
     void addEmployee(String lastName, String firstName, @Nullable String middleName, Long depId);
 
+    void addEmployee(Employee employee);
+
     /**
      * Редактировать текущего сотрудника в бд по заданным параметрам
      * @param empId - id сотрудника

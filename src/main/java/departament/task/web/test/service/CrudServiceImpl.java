@@ -11,10 +11,10 @@ import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class CrudServiceImpl implements CrudService {
     /**
      * Инъекции зависимости от репозиториев таблиц
@@ -41,11 +41,15 @@ public class CrudServiceImpl implements CrudService {
 
     @Override
     public void addEmployee(String lastName, String firstName, String middleName, Long depId) {
-        employeeRepository.save(new Employee(firstName, lastName, middleName,
+        employeeRepository.saveAndFlush(new Employee(firstName, lastName, middleName,
                 departmentRepository.getById(depId)));
     }
 
-    @Transactional
+    @Override
+    public void addEmployee(Employee employee) {
+        employeeRepository.saveAndFlush(employee);
+    }
+
     @Override
     public void updateEmployee(Long empId, String lastName, String firstName,
                                String middleName, Long depId) {
@@ -55,8 +59,7 @@ public class CrudServiceImpl implements CrudService {
 
     @Override
     public Employee findEmployeeById(long id) {
-        Optional<Employee> emp;
-        return (emp = employeeRepository.findById(id)).isEmpty() ? null : emp.get();
+        return employeeRepository.findById(id).get();
     }
 
     @Override

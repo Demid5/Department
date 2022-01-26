@@ -7,66 +7,69 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @GeneratedValue
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String first_name;
-    @Column(nullable = false)
-    private String last_name;
-    @Column
-    private String middle_name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "middle_name")
+    private String middleName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_depatrment")
     private Department department;
 
+    public Employee() {}
+
+    public Employee(String firstName, String lastName, String middleName, Department department) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.department = department;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Employee() {}
-
-    public Employee(String first_name, String last_name, String middle_name, Department department) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.middle_name = middle_name;
-        this.department = department;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setMiddle_name(String middle_name) {
-        this.middle_name = middle_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public String getMiddle_name() {
-        return middle_name;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public Department getDepartment() {
         return department;
     }
 
-    public Long getId() {
-        return id;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

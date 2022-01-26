@@ -31,7 +31,6 @@
                             </li>
                      </ul>
                     <br>
-                    <button type="button" class="btn btn-dark">Add</button>
                     <button type="submit" class="btn btn-primary">Show employees</button>
                     </form>
                 </div>
@@ -50,21 +49,13 @@
                         </thead>
                         <tbody>
                         <tr th:each="employee : ${employees}">
-                            <td th:text="*{employee.last_name}"></td>
-                            <td th:text="*{employee.first_name}"></td>
-                            <td th:text="*{employee.middle_name}"></td>
+                            <td th:text="*{employee.lastName}"></td>
+                            <td th:text="*{employee.firstName}"></td>
+                            <td th:text="*{employee.middleName}"></td>
                             <td th:text="*{employee.department.name}"></td>
                             <td>
-                                <form th:action="@{/updateEmployee}">
-                                    <input hidden name="empId" th:value="${employee.id}">
-                                    <button type="submit" class="btn btn-info">Edit</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form th:action="@{/deleteEmployee}" method="post">
-                                    <input hidden name="empId" th:value="${employee.id}">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                <a role="button" class="btn btn-info" th:href="@{'/editEmployee/' + ${employee.id}}">Edit</a>
+                                <a role="button" class="btn btn-danger" th:href="@{'/deleteEmployee/' + ${employee.id}}">Delete</a>
                             </td>
                         </tr>
                         </tbody>

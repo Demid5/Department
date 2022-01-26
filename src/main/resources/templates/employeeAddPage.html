@@ -20,37 +20,35 @@
             </a>
         </header>
 
-        <div class="row align-items-md-stretch">
-            <form th:action="@{addEmployee}" method="post">
+        <form th:action="@{addEmployee}" th:object="${employee}" method="post">
+            <div class="row align-items-md-stretch">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="last-name" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="last-name" th:field="*{lastName}" placeholder="Last name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="first-name" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="first-name" th:field="*{firstName}" placeholder="First name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="middle-name" class="form-label">Middle name</label>
+                            <input type="text" class="form-control" id="middle-name" th:field="*{middleName}" placeholder="Middle name">
+                        </div>
+                    </div>
 
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="last-name" class="form-label">Last name</label>
-                    <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last name">
-                </div>
-                <div class="mb-3">
-                    <label for="first-name" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="first-name" name="first-name" placeholder="First name">
-                </div>
-                <div class="mb-3">
-                    <label for="middle-name" class="form-label">Middle name</label>
-                    <input type="text" class="form-control" id="middle-name" name="middle-name" placeholder="Middle name">
-                </div>
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item" th:each="dep : ${departments}">
+                                <input class="form-check-input me-1" type="radio" aria-label="..." th:field="*{department}" th:value="${dep.id}">
+                                <span th:text="${dep.name}"></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" class="btn btn-info">Add</button>
             </div>
-
-            <div class="col-md-6">
-                <ul class="list-group">
-                    <li class="list-group-item" th:each="dep : ${departments}">
-                        <input class="form-check-input me-1" type="radio" value="" aria-label="..." name="depId"  th:value="${dep.id}">
-                        <span th:text="${dep.name}"></span>
-                    </li>
-                </ul>
-            </div>
-
-                <button type="submit" class="btn btn-info">Add</button>
-
-            </form>
-        </div>
+        </form>
 
         <footer class="pt-3 mt-4 text-muted border-top">
             &copy; 2021

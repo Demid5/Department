@@ -11,15 +11,15 @@ alter table department
 
 create table employee
 (
-    id             int auto_increment,
-    `last-name`    varchar(50) not null,
-    `first-name`   varchar(50) not null,
-    `middle-name`  varchar(50) null,
-    id_depatrament int         not null,
+    id            int auto_increment,
+    last_name   varchar(50) not null,
+    first_name  varchar(50) not null,
+    middle_name varchar(50) null,
+    id_depatrment int         not null,
     constraint employee_id_uindex
         unique (id),
     constraint employee_department_id_fk
-        foreign key (id_depatrament) references department (id)
+        foreign key (id_depatrment) references department (id)
             on update cascade on delete cascade
 );
 

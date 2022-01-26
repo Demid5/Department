@@ -7,11 +7,13 @@ import java.util.List;
 @Entity
 @Table(name = "department")
 public class Department {
+
     @Id
+    @Column(name = "id")
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
